@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TruYum.Models.MenuItem>
+@{
+    ViewBag.Title = "MenuItemAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Menu Item Display For Admin</h2>
+<!--The “Create New” link in the menu item listpage should be used to Create a new Menu Item by the admin user.-->
+@Html.ActionLink("Create New", "Add", "MenuItems", null, new { @class = "btn btn-primary btn-sm"})
+
+
+@if (!Model.Any())
+{
+    <p>No Records Yet</p>
+}
+else
+{
+<div  style="margin:10px auto;">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Free Delivery</th>
+                <th>Date Of Launch</th>
+                <th>Active</th>
+                <th>Category</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+
+            <tr>
+
+                <td>@m.Id</td>
+                <td>@m.Name</td>
+                @if (m.FreeDelivery)
+                {
+                    <td><input class="form-check-input" type="checkbox" checked disabled></td>
+                }
+                else
+                {
+                    <td><input class="form-check-input" type="checkbox" disabled></td>
+                }
+                <td>@m.DateOfLaunch</td>
+                @if (m.Active)
+                {
+                <td><input class="form-check-input" type="checkbox" checked disabled></td>
+                }
+                else
+                {
+                <td><input class="form-check-input" type="checkbox" disabled></td>
+                }
+                <td>@m.Category.Name</td>
+                <td>@Html.ActionLink("Edit", "Edit", "MenuItems", new { id = m.Id }, null)</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}
+

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TruYum.Models.MenuItem>
+@{
+    ViewBag.Title = "MenuItemAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Items in the Menu</h2>
+<!--The “Create New” link in the menu item listpage should be used to Create a new Menu Item by the admin user.-->
+@Html.ActionLink("View Cart", "ViewCart", "MenuItems", null, new { @class = "btn btn-primary btn-sm" })
+
+@if (!Model.Any())
+{
+    <p>No Records Yet</p>
+}
+else
+{
+    <table class="table table-bordered table-hover" style="margin:10px auto;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Free Delivery</th>
+                <th>Date Of Launch</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+
+            if(@m.Active)
+            {
+            <tr>
+
+                <td>@m.Name</td>
+                @if (m.FreeDelivery)
+                {
+                    <td><input class="form-check-input" type="checkbox" checked disabled></td>
+                }
+                else
+                {
+                    <td><input class="form-check-input" type="checkbox" disabled></td>
+                }
+                <td>@m.DateOfLaunch</td>
+                <td>@m.Category.Name</td>
+                <td>@Html.ActionLink("Add To Cart", "AddToCart", "MenuItems", new { id = m.Id }, null)</td>
+            </tr>
+            }
+
+            }
+
+        </tbody>
+    </table>
+}

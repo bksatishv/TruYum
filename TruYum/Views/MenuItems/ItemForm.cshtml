@@ -1,0 +1,52 @@
+﻿@model TruYum.ViewModels.ItemFormViewModel
+@{
+    ViewBag.Title = "ItemForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center;">Create/Edit Menu Item Form</h2>
+    @using (Html.BeginForm("Add", "MenuItems",FormMethod.Post, new { style = "margin:0 auto; width:280px;" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.MenuItem.Name)
+            @Html.TextBoxFor(m => m.MenuItem.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.MenuItem.Name)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.MenuItem.Price)
+            @Html.TextBoxFor(m => m.MenuItem.Price, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.MenuItem.Price)
+        </div>
+        <div class="form-group">
+
+            @Html.LabelFor(m => m.MenuItem.DateOfLaunch)
+            @Html.TextBoxFor(m => m.MenuItem.DateOfLaunch, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m=>m.MenuItem.DateOfLaunch)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Categories)
+            @Html.DropDownListFor(m => m.MenuItem.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "Select Category", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Categories)
+        </div>
+        <div class="form-group">
+            @Html.CheckBoxFor(m => m.MenuItem.Active, new { @class = "form-check-input" })
+            @Html.LabelFor(m => m.MenuItem.Active, new { @class = "form-check-label" })
+            @Html.ValidationMessageFor(m => m.MenuItem.Active)
+            @Html.CheckBoxFor(m => m.MenuItem.FreeDelivery, new { @class = "form-check-input" })
+            @Html.LabelFor(m => m.MenuItem.FreeDelivery, new { @class = "form-check-label" })
+            @Html.ValidationMessageFor(m=>m.MenuItem.FreeDelivery)
+        </div>
+
+
+        @Html.HiddenFor(m => m.MenuItem.Id)
+        <button type="submit" id="submit" class="btn btn-primary" style="display: block; margin: 0 auto; width:40%">Submit</button>
+
+    }
+
+
+
+
+
+
+

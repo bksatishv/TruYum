@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TruYum.Models.Cart>
+@{
+    ViewBag.Title = "MenuItemAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cart</h2>
+
+@if (!Model.Any())
+{
+    <p>No Items in cart</p>
+    @Html.ActionLink("View Items", "Index", "MenuItems", null, new { @class = "btn btn-primary btn-sm" })
+
+}
+else
+{
+    @Html.ActionLink("Back", "Index", "MenuItems",new { @class = "btn btn-primary btn-sm" })
+
+    <table class="table table-bordered table-hover" style="margin:10px auto;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Free Delivery</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+
+            <tr>
+
+                <td>@m.MenuItem.Name</td>
+                <td>@m.MenuItem.FreeDelivery</td>
+                <td>@m.MenuItem.Price</td>
+                <td>@Html.ActionLink("Remove", "RemoveItemFromCart", "MenuItems", new { id = m.Id }, null)</td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
