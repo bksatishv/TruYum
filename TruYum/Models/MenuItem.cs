@@ -41,6 +41,7 @@ namespace TruYum.Models
 
         //Reference the CategoryId and the Category class reference as Foreign key in the MenuItem class
         public Category Category { get; set; }
+        [Display(Name="Category")]
         public int CategoryId { get; set; }
 
     }
